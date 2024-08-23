@@ -10,16 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`http://localhost:3000/products?category=${category}`)
                 .then(response => response.json())
                 .then(data => {
-                    productList.innerHTML = '<h2>Products:</h2><ul>' +
+                    // Clear existing content
+                    productList.innerHTML = '<h2>Products:</h2><div class="product-list">' +
                         data.map(product => `
-                            <li>
+                            <div class="product-item">
                                 <img src="${product.image}" alt="${product.name}">
                                 <h3>${product.name}</h3>
                                 <p>${product.description}</p>
                                 <p class="price">Price: $${product.price.toFixed(2)}</p>
-                            </li>
+                            </div>
                         `).join('') +
-                        '</ul>';
+                        '</div>';
                 })
                 .catch(error => console.error('Error fetching products:', error));
         });
